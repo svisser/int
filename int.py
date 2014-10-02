@@ -41,7 +41,7 @@ template = """\
 hex: {0:X}
 dec: {0:,d}
 oct: {0:o}
-bin: {1}"""
+bin: {0:b}"""
 
 
 bases = {
@@ -55,19 +55,6 @@ bases = {
 
 def println(s=''):
     sys.stdout.write(s + '\n')
-
-
-def int_to_octet(i):
-    s = '' if i else '00000000'
-    while i:
-        for digit in range(8):
-            if i & 1 == 1:
-                s = '1' + s
-            else:
-                s = '0' + s
-            i >>= 1
-        s = ' ' + s
-    return s.lstrip()
 
 
 def parse_arg(s):
@@ -85,7 +72,7 @@ def parse_arg(s):
     if int_val < 0:
         return 'error: negative integers are not supported'
     else:
-        return template.format(int_val, int_to_octet(int_val))
+        return template.format(int_val)
 
 
 def main():
